@@ -9,6 +9,6 @@ describe('getHouses API call', () => {
 
     await getHouses()
 
-    expect(mockedAxios.get).toBeCalledWith('http://localhost:8000')
+    expect(mockedAxios.get).toBeCalledWith('http://localhost:8000/get-houses')
   })
 })

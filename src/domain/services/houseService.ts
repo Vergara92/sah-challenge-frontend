@@ -5,7 +5,6 @@ import IHouse from '../models/IHouse.interface'
 const houseService = {
   getList: async ():Promise<IHouse[]> => {
     const houseList = await getHouses()
-
     return houseList.map(house => new House(house))
   }
 }

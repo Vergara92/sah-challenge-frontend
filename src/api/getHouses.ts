@@ -1,9 +1,13 @@
 import IHouse from '@/domain/models/IHouse.interface'
 import axios from 'axios'
 
+interface rawHouseList {
+  message: IHouse[]
+}
+
 export default function getHouses (): Promise<IHouse[]> {
-  return axios.get<IHouse[]>('http://localhost:8000')
+  return axios.get<rawHouseList>('http://localhost:8000/get-houses')
     .then(response => {
-      return response.data
+      return response.data.message
     })
 }
