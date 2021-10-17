@@ -8,12 +8,13 @@ Vue.use(Vuex)
 export class State {
   houses:IHouse[] = []
   sortingKey: 'city' | 'address' | boolean = false
+  currentPage = 1
 }
 
 export const getters: GetterTree<State, State> = {
   sortedHouses (state):IHouse[] | [] {
     const sortingKey = state.sortingKey
-    console.log(state.houses)
+
     if (typeof sortingKey !== 'string') return state.houses
 
     const housesToSort = state.houses.slice()
@@ -26,6 +27,19 @@ export const getters: GetterTree<State, State> = {
       if (stringA > stringB) return 1
       return 0
     })
+  },
+
+  paginatedHouses (state, getters): IHouse[] | [] {
+    const currentPage = state.currentPage
+    const firstHouseIndex = currentPage * 10 - 10
+    const lastHouseIndex = currentPage * 10 - 1
+
+    return getters.sortedHouses.filter((house: IHouse, index: number) => {
+      if (index >= firstHouseIndex && index <= lastHouseIndex) {
+        return true
+      }
+      return false
+    })
   }
 }
 
@@ -35,6 +49,9 @@ export const mutations = <MutationTree<State>> {
   },
   SET_SORTING_ORDER (state, sortingKey) {
     state.sortingKey = sortingKey
+  },
+  SET_CURRENT_PAGE (state, currentPage: number) {
+    state.currentPage = currentPage
   }
 }
 
@@ -46,6 +63,9 @@ export const actions = <ActionTree<State, State>> {
   },
   setSortingOrder ({ commit }, sortingKey: string | boolean) {
     commit('SET_SORTING_ORDER', sortingKey)
+  },
+  changePage ({ commit }, currentPage: number) {
+    commit('SET_CURRENT_PAGE', currentPage)
   }
 }
 

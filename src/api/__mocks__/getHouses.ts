@@ -55,6 +55,24 @@ const getHousesMocked = ():IHouse[] => {
       address: 'Calle Cartagena',
       city: 'madrid',
       link: 'https://www.spotahome.com/madrid/for-rent:apartments/80065?utm_source=housinganywhere&utm_medium=cffeeds&utm_campaign=normalads'
+    },
+    {
+      image: 'https://d1052pu3rm1xk9.cloudfront.net/fsosw_960_540_verified…7ff86c2f011ef1cbda5443b6a19a30b73277917dfeabae16a0da2f29.jpg',
+      address: 'José Abascal',
+      city: 'madrid',
+      link: 'https://www.spotahome.com/madrid/for-rent:apartments/80046?u…ce=housinganywhere&utm_medium=cffeeds&utm_campaign=normalads'
+    },
+    {
+      image: 'https://d1052pu3rm1xk9.cloudfront.net/fsosw_960_540_nonverif…6651fa6d5fe20299f2cec610707cac97d43d610422e8786752c5e6ca.jpg',
+      address: 'Breton de los Herreros',
+      city: 'madrid',
+      link: 'https://www.spotahome.com/madrid/for-rent:rooms/80338?utm_so…ce=housinganywhere&utm_medium=cffeeds&utm_campaign=normalads'
+    },
+    {
+      image: 'https://d1052pu3rm1xk9.cloudfront.net/fsosw_960_540_verified…81961c331d4f2bd371502e3bd7dbe67aee97c9ecb51f2a9def58bde0.jpg',
+      address: 'Hileras',
+      city: 'madrid',
+      link: 'https://www.spotahome.com/madrid/for-rent:rooms/80561?utm_so…ce=housinganywhere&utm_medium=cffeeds&utm_campaign=normalads'
     }
   ]
 }

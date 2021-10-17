@@ -30,7 +30,34 @@ describe('Store', () => {
 
       const sortedHouses = getters.sortedHouses(state, rootGetters, rootState, rootGetters)
 
-      expect(sortedHouses[0].address).toBe('Calle Cartagena')
+      expect(sortedHouses[0].address).toBe('Breton de los Herreros')
+    })
+
+    it('show only 10 items in paginatedHouses', () => {
+      state.houses = getHousesMocked()
+      const mockedGetters = {
+        sortedHouses: state.houses
+      }
+      const rootState = state
+      const rootGetters = mockedGetters
+
+      const paginatedHouses = getters.paginatedHouses(state, mockedGetters, rootState, rootGetters)
+
+      expect(paginatedHouses.length).toBe(10)
+    })
+
+    it('show items related with the currentPage', () => {
+      state.houses = getHousesMocked()
+      state.currentPage = 2
+      const mockedGetters = {
+        sortedHouses: state.houses
+      }
+      const rootState = state
+      const rootGetters = mockedGetters
+
+      const paginatedHouses = getters.paginatedHouses(state, mockedGetters, rootState, rootGetters)
+
+      expect(paginatedHouses[0]).toBe(mockedGetters.sortedHouses[10])
     })
   })
 
@@ -42,10 +69,17 @@ describe('Store', () => {
 
       expect(state.houses).toBe(houses)
     })
+
     it('Sets sortingKey with SET_SORTING_ORDER mutation', () => {
       mutations.SET_SORTING_ORDER(state, 'address')
 
       expect(state.sortingKey).toBe('address')
+    })
+
+    it('Sets currentPage with SET_CURRENT_PAGE mutation', () => {
+      mutations.SET_CURRENT_PAGE(state, 3)
+
+      expect(state.currentPage).toBe(3)
     })
   })
   describe('Store actions', () => {
@@ -81,6 +115,14 @@ describe('Store', () => {
       setSortingOrder(actionContext, 'city')
 
       expect(actionContext.commit).toBeCalledWith('SET_SORTING_ORDER', 'city')
+    })
+
+    it('trigger SET_CURRENT_PAGE on changePage call', () => {
+      const changePage = actions.changePage as (ctx: typeof actionContext, currentPage: number) => Commit
+
+      changePage(actionContext, 10)
+
+      expect(actionContext.commit).toBeCalledWith('SET_CURRENT_PAGE', 10)
     })
   })
 })
