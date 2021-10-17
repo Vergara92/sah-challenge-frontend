@@ -12,6 +12,11 @@
         <div class="house-item--field">
         </div>
       </li>
+
+      <li class="house-list--sort" data-test-id="sorting-row" v-if="$slots.sorting">
+        <slot name="sorting" />
+      </li>
+
         <template v-if="houses.length > 0">
           <house-item
             v-for="(house, index) in houses"
@@ -63,7 +68,7 @@ export default Vue.extend({
     width: 100%;
     height: 2px;
     background: black;
-    border-radius: 4px;
+    border-radius: var(--border-radius-small);
   }
 }
 

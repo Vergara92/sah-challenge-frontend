@@ -59,7 +59,7 @@ export default Vue.extend({
     width: 100%;
     height: 1px;
     background: color-mod(#000 alpha(50%));
-    border-radius: 4px;
+    border-radius: var(--border-radius-small);
   }
 
   &:last-child {
@@ -90,11 +90,19 @@ export default Vue.extend({
 }
 
 .house-item--image {
-  height: 150px;
+  height: 75px;
   width: 100%;
   background-size: cover;
   background-position: center;
-  border-radius: 8px;
+  border-radius: var(--border-radius-small);
+
+  @media (min-width: 600px) {
+    height: 100px;
+  }
+
+  @media (min-width: 1020px) {
+    height: 150px;
+  }
 }
 
 .house-item--city {

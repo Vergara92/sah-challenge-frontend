@@ -3,7 +3,13 @@
     <div class="container">
       <h1 class="title">Spot a House!</h1>
 
-      <house-list :houses="houses"/>
+      <house-list :houses="sortedHouses">
+        <template v-slot:sorting>
+          <sort-select
+            @change-order-sorting="changeOrderSorting"
+          />
+        </template>
+      </house-list>
     </div>
   </div>
 </template>
@@ -11,21 +17,28 @@
 <script lang="ts">
 import Vue from 'vue'
 import HouseList from '@/components/HouseList.vue'
-import { mapActions, mapState } from 'vuex'
+import SortSelect from '@/components/SortSelect.vue'
+
+import { mapActions, mapGetters } from 'vuex'
 
 export default Vue.extend({
   name: 'App',
 
   components: {
-    HouseList
+    HouseList,
+    SortSelect
   },
 
   computed: {
-    ...mapState(['houses'])
+    ...mapGetters(['sortedHouses'])
   },
 
   methods: {
-    ...mapActions(['fetchHouses'])
+    ...mapActions(['fetchHouses', 'setSortingOrder']),
+
+    changeOrderSorting (orderKey: string | boolean) {
+      this.setSortingOrder(orderKey)
+    }
   },
 
   created () {
@@ -37,6 +50,8 @@ export default Vue.extend({
 <style lang="postcss">
 :root {
   --main-color: #0a0d77;
+  --border-radius: 8px;
+  --border-radius-small: 4px;
 }
 
 #app {
