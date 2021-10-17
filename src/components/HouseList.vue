@@ -12,21 +12,21 @@
         <div class="house-item--field">
         </div>
       </li>
-        <house-item
-          v-for="(house, index) in houses"
-          :key="index"
-          :house="house"
-        />
+        <template v-if="houses.length > 0">
+          <house-item
+            v-for="(house, index) in houses"
+            :key="index"
+            :house="house"
+          />
+        </template>
     </ul>
   </div>
 </template>
 
 <script lang="ts">
 import Vue from 'vue'
-// import mockHouses from '@/api/__mocks__/getHouses'
 import HouseItem from '@/components/HouseItem.vue'
 import IHouse from '@/domain/models/IHouse.interface'
-import houseService from '@/domain/services/houseService'
 
 export default Vue.extend({
   name: 'HouseList',
@@ -35,14 +35,11 @@ export default Vue.extend({
     HouseItem
   },
 
-  data () {
-    return {
-      houses: [] as IHouse[]
+  props: {
+    houses: {
+      required: true,
+      type: Array as () => IHouse[]
     }
-  },
-
-  async created () {
-    this.houses = await houseService.getList()
   }
 })
 </script>

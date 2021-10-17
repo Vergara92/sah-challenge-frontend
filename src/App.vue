@@ -3,7 +3,7 @@
     <div class="container">
       <h1 class="title">Spot a House!</h1>
 
-      <house-list />
+      <house-list :houses="houses"/>
     </div>
   </div>
 </template>
@@ -11,11 +11,25 @@
 <script lang="ts">
 import Vue from 'vue'
 import HouseList from '@/components/HouseList.vue'
+import { mapActions, mapState } from 'vuex'
 
 export default Vue.extend({
   name: 'App',
+
   components: {
     HouseList
+  },
+
+  computed: {
+    ...mapState(['houses'])
+  },
+
+  methods: {
+    ...mapActions(['fetchHouses'])
+  },
+
+  created () {
+    this.fetchHouses()
   }
 })
 </script>
