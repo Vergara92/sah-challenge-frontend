@@ -1,5 +1,5 @@
 <template>
-  <li class="house-item">
+  <li class="house-item" data-test-id="house-item">
     <div class="house-item--field">
       <div class="house-item--image"
         :style="{ backgroundImage: `url(${house.image})` }"

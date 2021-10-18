@@ -1,6 +1,6 @@
 <template>
   <div class="house-list--container">
-    <ul class="house-list">
+    <ul class="house-list" data-test-id="house-list">
       <li class="house-list--header">
         <div class="house-item--field"></div>
         <div class="house-item--field">
